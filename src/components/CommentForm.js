@@ -16,7 +16,7 @@ class Comment extends Component {
             
         }
 
-        this.toggleCommentModel = this.toggleCommentModal.bind(this);
+        this.toggleCommentModal = this.toggleCommentModal.bind(this);
         this.handleSubmitComment = this.handleSubmitComment.bind(this);
       
     }
@@ -30,7 +30,8 @@ class Comment extends Component {
 
     handleSubmitComment = (values)=> {
         this.toggleCommentModal(); 
-       this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        alert('Current State is: ' + JSON.stringify(values));
+       this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     
@@ -51,7 +52,13 @@ class Comment extends Component {
                             <Row className="form-group">
                                 <Label htmlFor="rating" md={12}>Rating</Label>
                                 <Col md={12}>
-                                    <Control.text model=".rating" id="rating" name="rating" className="form-control" />
+                                    <Control.select model=".rating" id="rating" name="rating" className="form-control" >
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </Control.select>
                                 </Col>
                             </Row>
                             <Row className="form-group">

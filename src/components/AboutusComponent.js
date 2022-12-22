@@ -1,34 +1,64 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from "../shared/baseUrl";
+import { Loading } from './LoadingComponent';
+//import { FadeTransform, Fade, Stagger } from 'react-animation-component';
 
-function About(props) {
-
+ function About(props, isLoading, errMess) {
+    // if (isLoading) {
+    //     return (
+    //         <div className="container">
+    //             <div className="row">
+    //                 <Loading />
+    //             </div>
+    //         </div>
+    //     );
+    // }
+    // else if (errMess) {
+    //     return (
+    //         <div className="container">
+    //             <div className="row">
+    //                 <div className="col-12">
+    //                     <h4>{errMess}</h4>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     );
+    // }
+    // else{
     const leaders = props.leaders.map((leader) => {
         return (
-            <div className='container m-5'>
+            <div className='container m-5' >
+                 {/* <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}> */}
                 <Media className='row'>
                     <Media left href="#" >
-                        <Media object src={leader.image} alt="Generic placeholder image" />
+                        <Media object src={baseUrl + leader.image} alt="Generic placeholder image" />
                     </Media>
                     <Media body className='offset-1'>
                         <Media heading>
-                        <p>{leader.name}</p>
-                        <Media>
-                            <small><p>{leader.designation}</p></small>
+                            <p>{baseUrl + leader.name}</p>
+                            <Media>
+                                <small><p>{baseUrl + leader.designation}</p></small>
+                            </Media>
                         </Media>
-                        </Media>
-                        <p>Leader {leader.description}</p>
-                        </Media>
+                        <p>Leader {baseUrl + leader.description}</p>
+                    </Media>
                 </Media>
+                {/* </FadeTransform> */}
             </div>
 
 
         );
     });
 
+
     return (
-        <div className="container">
+        <div className="container" >
             <div className="row">
                 <Breadcrumb>
                     <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
@@ -77,14 +107,18 @@ function About(props) {
                     </Card>
                 </div>
             </div>
-            <div className="row row-content">
+            <div className="row row-content" isLoading={props.leadersLoading} errMess={props.leadersErrMess} >
                 <div className="col-12">
                     <h2>Corporate Leadership</h2>
                 </div>
-                <div className="col-12">
+                <div className="col-12"  >
+                {/* <Stagger in>
+                    <Fade in> */}
                     <Media list>
                         {leaders}
                     </Media>
+                    {/* </Fade>
+                    </Stagger> */}
                 </div>
             </div>
         </div>
